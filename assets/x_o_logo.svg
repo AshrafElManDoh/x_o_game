@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="512" height="512" viewBox="0 0 512 512"
+     xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <!-- background is transparent -->
+  <defs>
+    <!-- soft shadow for depth -->
+    <filter id="softShadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="0" dy="10" stdDeviation="18" flood-color="#000" flood-opacity="0.18"/>
+    </filter>
+
+    <!-- rounded stroke for X -->
+    <style>
+      .xStroke { stroke-linecap: round; stroke-linejoin: round; }
+    </style>
+  </defs>
+
+  <!-- Outer composition group with slight shadow -->
+  <g filter="url(#softShadow)" transform="translate(0, -6)">
+    <!-- Big circle (O) -->
+    <g transform="translate(256, 256)">
+      <circle cx="0" cy="0" r="140" fill="none" stroke="#FF6B6B" stroke-width="26" />
+      <!-- inner ring for style -->
+      <circle cx="0" cy="0" r="96" fill="none" stroke="#FFD6A5" stroke-width="6" opacity="0.12"/>
+    </g>
+
+    <!-- Stylized X in front -->
+    <g transform="translate(256, 256)" stroke="#5563FF" stroke-width="30" class="xStroke">
+      <!-- two crossing rounded lines -->
+      <line x1="-120" y1="-120" x2="120" y2="120" />
+      <line x1="-120" y1="120" x2="120" y2="-120" />
+    </g>
+
+    <!-- small accent circles to balance composition -->
+    <g transform="translate(256,256)">
+      <circle cx="170" cy="-140" r="10" fill="#FFD166" opacity="0.9"/>
+      <circle cx="-170" cy="140" r="8" fill="#9AE6B4" opacity="0.9"/>
+    </g>
+  </g>
+
+  <!-- subtle border to make it pop on light backgrounds -->
+  <rect x="6" y="6" width="500" height="500" rx="64" fill="none" stroke="#000000" opacity="0.02"/>
+</svg>

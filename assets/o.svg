@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="512" height="512" viewBox="0 0 512 512"
+     xmlns="http://www.w3.org/2000/svg">
+  <g transform="translate(256,256)">
+    <circle cx="0" cy="0" r="160" fill="none" stroke="#FF6B6B" stroke-width="40"/>
+    <!-- inner decorative ring (اختياري) -->
+    <circle cx="0" cy="0" r="110" fill="none" stroke="#FFD6A5" stroke-width="8" opacity="0.15"/>
+  </g>
+</svg>
