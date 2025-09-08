@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:x_o_app/cubits/game_cubit/game_cubit.dart';
 import 'package:x_o_app/widgets/custom_button.dart';
 import 'package:x_o_app/widgets/custom_x_o.dart';
+import 'package:x_o_app/widgets/winning_line.dart';
 
 class GameView extends StatelessWidget {
   const GameView({super.key});
@@ -69,7 +70,15 @@ class GameView extends StatelessWidget {
                     ],
                   ),
                   SizedBox(height: 30),
-                  AbsorbPointer(absorbing: true, child: CustomXO()),
+                  AbsorbPointer(
+                    absorbing: true,
+                    child: Stack(
+                      children: [
+                        CustomXO(),
+                        WinningLine(type: state.lineType),
+                      ],
+                    ),
+                  ),
                   SizedBox(height: 50),
                   CustomButton(
                     title: "Reset",
