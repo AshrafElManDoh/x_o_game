@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:x_o_app/cubits/game_cubit/game_cubit.dart';
 import 'package:x_o_app/widgets/custom_container.dart';
 
-class CustomXO extends StatelessWidget {
-  const CustomXO({super.key});
+class CustomXOFor3xo extends StatelessWidget {
+  const CustomXOFor3xo({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +17,7 @@ class CustomXO extends StatelessWidget {
           children: List.generate(3, (index) {
             return GestureDetector(
               onTap: () {
-                cubit.pressedOnCell(index, 0);
+                cubit.pressedOnCellVersion3XO(index: index, row: 0);
               },
               child: CustomContainer(state: cubit.board[0][index]),
             );
@@ -27,7 +27,7 @@ class CustomXO extends StatelessWidget {
           children: List.generate(3, (index) {
             return GestureDetector(
               onTap: () {
-                cubit.pressedOnCell(index, 1);
+                cubit.pressedOnCellVersion3XO(index: index, row: 1);
               },
               child: CustomContainer(state: cubit.board[1][index]),
             );
@@ -37,7 +37,7 @@ class CustomXO extends StatelessWidget {
           children: List.generate(3, (index) {
             return GestureDetector(
               onTap: () {
-                cubit.pressedOnCell(index, 2);
+                cubit.pressedOnCellVersion3XO(index: index, row: 2);
               },
               child: CustomContainer(state: cubit.board[2][index]),
             );

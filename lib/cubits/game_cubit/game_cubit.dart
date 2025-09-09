@@ -14,6 +14,8 @@ class GameCubit extends Cubit<GameState> {
   CellState playerState = CellState.empty;
   WinningLineType? winningLineType;
   AudioPlayer audio = AudioPlayer();
+  List<List<int>> xIndices = [];
+  List<List<int>> oIndices = [];
 
   double getSize(BuildContext context) {
     double size = MediaQuery.of(context).size.width * 0.3;
@@ -51,8 +53,59 @@ class GameCubit extends Cubit<GameState> {
         switchPlayer();
       }
       emit(GameClicked());
+      checkWinner();
     }
-    checkWinner();
+  }
+
+  void pressedOnCellVersion3XO({required int index, required int row}) {
+    if (board[row][index] != CellState.x && board[row][index] != CellState.o) {
+      if (playerState == CellState.empty) {
+        playerState = CellState.x;
+        board[row][index] = playerState;
+        check3XAnd3O(state: playerState, newIndex: index, newRow: row);
+        playerState = CellState.o;
+      } else if (playerState == CellState.o) {
+        board[row][index] = CellState.o;
+        check3XAnd3O(state: playerState, newIndex: index, newRow: row);
+        switchPlayer();
+      } else if (playerState == CellState.x) {
+        board[row][index] = CellState.x;
+        check3XAnd3O(state: playerState, newIndex: index, newRow: row);
+        switchPlayer();
+      }
+      emit(GameClicked());
+      checkWinner();
+    }
+  }
+
+  // [ [0,1] , [1,1] , [1,2] ]
+  void check3XAnd3O({
+    required CellState state,
+    required int newIndex,
+    required int newRow,
+  }) {
+    if (state == CellState.x) {
+      if (xIndices.length == 3) {
+        int deletedRow = xIndices[0][0];
+        int deletedIndex = xIndices[0][1];
+        board[deletedRow][deletedIndex] = CellState.empty;
+        xIndices.removeAt(0);
+        xIndices.add([newRow, newIndex]);
+      } else {
+        xIndices.add([newRow, newIndex]);
+      }
+    } else if (state == CellState.o) {
+      //
+      if (oIndices.length == 3) {
+        int deletedRow = oIndices[0][0];
+        int deletedIndex = oIndices[0][1];
+        board[deletedRow][deletedIndex] = CellState.empty;
+        oIndices.removeAt(0);
+        oIndices.add([newRow, newIndex]);
+      } else {
+        oIndices.add([newRow, newIndex]);
+      }
+    }
   }
 
   void checkWinner() {
@@ -68,7 +121,7 @@ class GameCubit extends Cubit<GameState> {
         } else if (row == 2) {
           winningLineType = WinningLineType.row3;
         }
-       playSound();
+        playSound();
         emit(GameOver(winner: board[row][0], lineType: winningLineType!));
       }
     }
@@ -116,6 +169,8 @@ class GameCubit extends Cubit<GameState> {
   void reset() {
     board = List.generate(3, (_) => List.filled(3, CellState.empty));
     playerState = CellState.empty;
+    xIndices = [];
+    oIndices = [];
     emit(GameClicked());
   }
 }

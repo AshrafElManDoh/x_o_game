@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:x_o_app/cubits/game_cubit/game_cubit.dart';
 import 'package:x_o_app/views/start_view.dart';
 
 void main() {
@@ -10,10 +12,13 @@ class XOGame extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData.dark(),
-      home: const StartView(),
+    return BlocProvider(
+      create: (context) => GameCubit(),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData.dark(),
+        home: const StartView(),
+      ),
     );
   }
 }
