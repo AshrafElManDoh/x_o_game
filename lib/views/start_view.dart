@@ -15,7 +15,7 @@ class StartView extends StatelessWidget {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          SvgPicture.asset("assets/x_o_logo.svg"),
+          Hero(tag: "Logo", child: SvgPicture.asset("assets/x_o_logo.svg")),
           SizedBox(height: 30),
           CustomButton(
             title: "Normal game",

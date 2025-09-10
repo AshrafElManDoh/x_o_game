@@ -14,7 +14,7 @@ class GameView extends StatelessWidget {
     final cubit = context.read<GameCubit>();
     return Scaffold(
       appBar: AppBar(
-        title: SvgPicture.asset("assets/x_o_logo.svg", height: 90),
+        title: Hero(tag: "Logo",child: SvgPicture.asset("assets/x_o_logo.svg", height: 90)),
         centerTitle: true,
       ),
       body: Padding(
